@@ -1,0 +1,1 @@
+# everscale-debot-nftauth-template
