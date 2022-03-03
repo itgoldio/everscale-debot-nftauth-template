@@ -18,7 +18,7 @@ interface IData{
 
 contract AuthDebot is Debot {
 
-    string _debotName = "itgold authentication debot";
+    string _debotName = "Itgold nft authentication debot";
     address _supportAddr = address.makeAddrStd(0, 0x5fb73ece6726d59b877c8194933383978312507d06dda5bcf948be9d727ede4b);
 
     address[] _nftList;
@@ -86,12 +86,7 @@ contract AuthDebot is Debot {
     function setAccounts(AccData[] accounts) public {
 
         _indexes = accounts;
-        if(_indexes.length==0){
-            Terminal.print(0, "Заглушка. Когда нет nft.");
-        }
-        else{
-            checkIndexes();
-        }
+        checkIndexes();
     }
 
     function checkIndexes() public {
@@ -182,10 +177,10 @@ contract AuthDebot is Debot {
         name = _debotName;
         version = "1.0";
         publisher = "https://itgold.io/";
-        key = "User authentication";
+        key = "User authentication use nft";
         author = "https://itgold.io/";
         support = _supportAddr;
-        hello = "Hello, i'm itgold authentication debot";
+        hello = "Hello, i'm itgold nft authentication debot";
         language = "en";
         dabi = m_debotAbi.get();
         icon = _icon;
