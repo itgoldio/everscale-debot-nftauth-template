@@ -176,7 +176,7 @@ contract AuthDebot is Debot {
         address support, string hello, string language, string dabi, bytes icon
     ) {
         name = _debotName;
-        version = "1.0";
+        version = "1.1";
         publisher = "https://itgold.io/";
         key = "User authentication use nft";
         author = "https://itgold.io/";
