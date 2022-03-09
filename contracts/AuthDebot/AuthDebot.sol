@@ -20,6 +20,7 @@ contract AuthDebot is Debot {
 
     string _debotName = "Itgold nft authentication debot";
     address _supportAddr = address.makeAddrStd(0, 0x5fb73ece6726d59b877c8194933383978312507d06dda5bcf948be9d727ede4b);
+    uint256 _ownerPubkey = tvm.pubkey();
 
     address[] _nftList;
     address _nftRoot = address(0);
@@ -175,7 +176,7 @@ contract AuthDebot is Debot {
         address support, string hello, string language, string dabi, bytes icon
     ) {
         name = _debotName;
-        version = "1.0";
+        version = "1.1";
         publisher = "https://itgold.io/";
         key = "User authentication use nft";
         author = "https://itgold.io/";
@@ -195,23 +196,33 @@ contract AuthDebot is Debot {
         Terminal.input(tvm.functionId(noop), "", false);
     }
 
-    function setNftRootAddr(address nftRoot) public checkPubkey {
+    function setNftRootAddr(address nftRoot) public onlyOwner {
         tvm.accept();
         _nftRoot = nftRoot;
     }
 
-    function setNftList(address[] nftList) public checkPubkey {
+    function setNftList(address[] nftList) public onlyOwner {
         tvm.accept();
         _nftList = nftList;
     }
 
-    function burn(address dest) public checkPubkey {
+    function setOwnerPubkey(uint256 ownerPubkey) public onlyOwner {
+        tvm.accept();
+        _ownerPubkey = ownerPubkey;
+    }
+
+    function setIcon(bytes icon) public onlyOwner {
+        tvm.accept();
+        _icon = icon;
+    }
+
+    function burn(address dest) public onlyOwner {
         tvm.accept();
         selfdestruct(dest);
     }
 
-    modifier checkPubkey() {
-        require(msg.pubkey() == tvm.pubkey(), 100);
+    modifier onlyOwner() {
+        require(msg.pubkey() == _ownerPubkey, 100);
         _;
     }
 
